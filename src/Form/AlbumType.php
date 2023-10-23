@@ -19,7 +19,7 @@ class AlbumType extends AbstractType
             ->add('album_img', FileType::class, [
                 'label' => 'Brochure (PDF file)',
                 'mapped' => false,
-                'required' => true,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

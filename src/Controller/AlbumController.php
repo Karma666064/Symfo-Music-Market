@@ -34,20 +34,22 @@ class AlbumController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $albumImage = $form->get('album_img')->getData();
 
-            $originalFilename = pathinfo($albumImage->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$albumImage->guessExtension();
+            if ($albumImage) {
+                $originalFilename = pathinfo($albumImage->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$albumImage->guessExtension();
 
-            try {
-                $albumImage->move(
-                    $this->getParameter('album_img_directory'),
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                echo("<p>Une erreur est survenue lors de l'importation du fichier</p>");
+                try {
+                    $albumImage->move(
+                        $this->getParameter('album_img_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    echo("<p>Une erreur est survenue lors de l'importation de l'image</p>");
+                }
+
+                $album->setAlbumImg($newFilename);
             }
-
-            $album->setAlbumImg($newFilename);
 
             $entityManager->persist($album);
             $entityManager->flush();
@@ -80,20 +82,22 @@ class AlbumController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $albumImage = $form->get('album_img')->getData();
 
-            $originalFilename = pathinfo($albumImage->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$albumImage->guessExtension();
-
-            try {
-                $albumImage->move(
-                    $this->getParameter('album_img_directory'),
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                echo("<p>Une erreur est survenue lors de l'importation du fichier</p>");
+            if ($albumImage) {
+                $originalFilename = pathinfo($albumImage->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$albumImage->guessExtension();
+    
+                try {
+                    $albumImage->move(
+                        $this->getParameter('album_img_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    echo("<p>Une erreur est survenue lors de l'importation de l'image</p>");
+                }
+    
+                $album->setAlbumImg($newFilename);
             }
-
-            $album->setAlbumImg($newFilename);
 
             $entityManager->flush();
 
