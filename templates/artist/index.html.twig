@@ -21,6 +21,7 @@
                 <td>
                     <a class="btn btn-outline-primary" href="{{ path('app_artist_show', {'id': artist.id}) }}">show</a>
                     <a class="btn btn-outline-primary" href="{{ path('app_artist_edit', {'id': artist.id}) }}">edit</a>
+                    {{ include('artist/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

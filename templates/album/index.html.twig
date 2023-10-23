@@ -13,9 +13,9 @@
             <p>{{ album.name }} - <span>{{ album.artist.name }}</span></p>
 
             <div class="btns">
-                <a class="btn btn-outline-primary" href="{{ path('app_album_show', {'id': album.id}) }}">show</a>
+                <a class="btn btn-outline-primary" href="{{ path('app_album_show', {'id': album.id}) }}">Show</a>
                 {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn btn-outline-primary" href="{{ path('app_album_edit', {'id': album.id}) }}">edit</a>
+                <a class="btn btn-outline-primary" href="{{ path('app_album_edit', {'id': album.id}) }}">Edit</a>
                 {% endif %}
             </div>
         </div>

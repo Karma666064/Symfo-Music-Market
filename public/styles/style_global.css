@@ -11,7 +11,7 @@ body {
 }
 
 .cards-album {
-    margin: 0 18px;
+    margin: 0 41px;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -19,7 +19,7 @@ body {
     > .card-album {
         background-color: #746a7c;
         padding: 9px;
-        width: 300px;
+        width: 294px;
         border-radius: 6px;
         text-align: center;
 
@@ -44,7 +44,7 @@ body {
 
 .btn-create-new {
     display: block;
-    margin: 15px auto 0;
+    margin: 27px auto;
     width: 108px;
 }
 
