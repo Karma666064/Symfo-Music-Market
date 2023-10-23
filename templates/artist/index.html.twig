@@ -1,36 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Artist index{% endblock %}
+{% block title %}Artist{% endblock %}
 
 {% block body %}
-    <h1>Artist index</h1>
+    <h1 class="title-artist">Artist</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="cards-artist">
         {% for artist in artists %}
-            <tr>
-                <td>{{ artist.id }}</td>
-                <td>{{ artist.name }}</td>
-                <td>
-                    <a class="btn btn-outline-primary" href="{{ path('app_artist_show', {'id': artist.id}) }}">show</a>
-                    <a class="btn btn-outline-primary" href="{{ path('app_artist_edit', {'id': artist.id}) }}">edit</a>
-                    {{ include('artist/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="card-artist">
+            <h2>{{ artist.name }} <span>#{{ artist.id }}</span></h2>
 
-    <a class="btn btn-outline-primary" href="{{ path('app_artist_new') }}">Create new</a>
+            <div class="albums-artist">
+                {% for album in albums %}
+                {% if album.artist.id == artist.id %}
+                <a href="{{ path('app_album_show', {'id': album.id}) }}" class="album-artist">
+                    <div class="img-album-artist">
+                        <img src="{{ asset('uploads/imgs/albums/'~album.albumImg) }}">
+                    </div>
+
+                    <p>{{ album.name }}</p>
+                </a>
+                {% endif %}
+                {% else %}
+                <p class="no-album">No albums is here</p>
+                {% endfor %}
+            </div>
+
+            <div class="btns">
+                <a class="btn btn-outline-primary" href="{{ path('app_artist_show', {'id': artist.id}) }}">Show More</a>
+                <a class="btn btn-outline-primary" href="{{ path('app_artist_edit', {'id': artist.id}) }}">Edit</a>
+                {{ include('artist/_delete_form.html.twig') }}
+            </div>
+        </div>
+        {% else %}
+        <p class="no-album">Nothing is here</p>
+        {% endfor %}
+    </div>
+
+    <a class="btn btn-outline-primary btn-create-new" href="{{ path('app_artist_new') }}">Create new</a>
 {% endblock %}

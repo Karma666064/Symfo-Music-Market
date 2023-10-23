@@ -3,13 +3,24 @@ body {
     color: white;
 }
 
-/* ----- Album ----- */
-/* --- Index --- */
-.title-album {
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.btn-create-new {
+    display: block;
+    margin: 27px auto;
+    width: 108px;
+}
+
+.title-page {
     margin-bottom: 30px;
     text-align: center;
 }
 
+/* ----- Album ----- */
+/* --- Index --- */
 .cards-album {
     margin: 0 41px;
     display: flex;
@@ -42,12 +53,6 @@ body {
     }
 }
 
-.btn-create-new {
-    display: block;
-    margin: 27px auto;
-    width: 108px;
-}
-
 /* --- show --- */
 .card-album-show {
     background-color: #746a7c;
@@ -67,6 +72,130 @@ body {
         overflow: hidden;
 
         > img { width: 100%; }
+    }
+
+    > .btns {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+}
+
+/* ----- Artist ----- */
+/* --- Index --- */
+.cards-artist {
+    margin: 0 41px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    > .card-artist {
+        background-color: #746a7c;
+        padding: 9px;
+        width: 294px;
+        border-radius: 6px;
+
+        > h2 {
+            font-size: 1.45rem;
+            text-align: center;
+        }
+
+        > .albums-artist {
+            display: flex;
+            margin: 21px 12px;
+            margin-top: 21px;
+            margin-left: 12px;
+            flex-direction: column;
+            gap: 6px;
+
+            > .album-artist {
+                display: flex;
+                padding: 6px;
+                align-items: center;
+                gap: 21px;
+                border-radius: 6px;
+                transition: all 90ms ease-in;
+
+                > .img-album-artist {
+                    background-color: #575757;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 3px;
+                    overflow: hidden;
+
+                    > img { width: 100%; }
+                }
+
+                > p { font-size: 110%; }
+            }
+
+            > .album-artist:hover {
+                background-color: #ffffff26;
+            }
+        }
+
+        > .btns {
+            display: flex;
+            gap: 9px;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+/* --- show --- */
+.card-artist-show {
+    background-color: #746a7c;
+    margin: 0 auto;
+    padding: 12px;
+    width: 600px;
+    border-radius: 9px;
+    font-size: 140%;
+    text-align: center;
+
+    /* > .img-album {
+        background-color: #575757;
+        margin: 0 auto 9px;
+        width: 264px;
+        height: 264px;
+        border-radius: 6px;
+        overflow: hidden;
+
+        > img { width: 100%; }
+    } */
+    > .albums-artist {
+        display: flex;
+        margin: 21px 12px;
+        margin-top: 21px;
+        margin-left: 12px;
+        flex-direction: column;
+        gap: 6px;
+
+        > .album-artist {
+            display: flex;
+            padding: 6px;
+            justify-content: center;
+            align-items: center;
+            gap: 21px;
+            border-radius: 6px;
+            transition: all 90ms ease-in;
+
+            > .img-album-artist {
+                background-color: #575757;
+                width: 48px;
+                height: 48px;
+                border-radius: 3px;
+                overflow: hidden;
+
+                > img { width: 100%; }
+            }
+
+            > p { font-size: 110%; }
+        }
+
+        > .album-artist:hover {
+            background-color: #ffffff26;
+        }
     }
 
     > .btns {

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Artist;
 use App\Form\ArtistType;
+use App\Repository\AlbumRepository;
 use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArtistController extends AbstractController
 {
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
-    public function index(ArtistRepository $artistRepository): Response
+    public function index(ArtistRepository $artistRepository, AlbumRepository $albumRepository): Response
     {
         return $this->render('artist/index.html.twig', [
             'artists' => $artistRepository->findAll(),
+            'albums' => $albumRepository->findAll()
         ]);
     }
 
@@ -43,10 +45,11 @@ class ArtistController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_artist_show', methods: ['GET'])]
-    public function show(Artist $artist): Response
+    public function show(Artist $artist, AlbumRepository $albumRepository): Response
     {
         return $this->render('artist/show.html.twig', [
             'artist' => $artist,
+            'albums' => $albumRepository->findAll()
         ]);
     }
 
