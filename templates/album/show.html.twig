@@ -6,7 +6,7 @@
     <h1 class="title-album">Album</h1>
 
     <div class="card-album-show">
-        <div class="img-album"></div>
+        <div class="img-album"><img src="{{ asset('uploads/imgs/albums/'~album.albumImg) }}"></div>
 
         <p>{{ album.name }} - <span>{{ album.artist.name }}</span></p>
 
@@ -17,22 +17,6 @@
             {% endif %}
         </div>
     </div>
-    {# <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ album.id }}</td>
-            </tr>
-            <tr>
-                <th>Artist</th>
-                <td>{{ album.artist.name }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ album.name }}</td>
-            </tr>
-        </tbody>
-    </table> #}
 
     {% if is_granted('ROLE_ADMIN') %}
     {{ include('album/_delete_form.html.twig') }}
