@@ -7,9 +7,11 @@ use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/album')]
 class AlbumController extends AbstractController
@@ -23,13 +25,30 @@ class AlbumController extends AbstractController
     }
 
     #[Route('/new', name: 'app_album_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $album = new Album();
         $form = $this->createForm(AlbumType::class, $album);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $albumImage = $form->get('album_img')->getData();
+
+            $originalFilename = pathinfo($albumImage->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$albumImage->guessExtension();
+
+            try {
+                $albumImage->move(
+                    $this->getParameter('album_img_directory'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                echo("<p>Une erreur est survenue lors de l'importation du fichier</p>");
+            }
+
+            $album->setAlbumImg($newFilename);
+
             $entityManager->persist($album);
             $entityManager->flush();
 
@@ -51,7 +70,7 @@ class AlbumController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_album_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Album $album, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, SluggerInterface $slugger, Album $album, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -59,6 +78,23 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $albumImage = $form->get('album_img')->getData();
+
+            $originalFilename = pathinfo($albumImage->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$albumImage->guessExtension();
+
+            try {
+                $albumImage->move(
+                    $this->getParameter('album_img_directory'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                echo("<p>Une erreur est survenue lors de l'importation du fichier</p>");
+            }
+
+            $album->setAlbumImg($newFilename);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_album_index', [], Response::HTTP_SEE_OTHER);

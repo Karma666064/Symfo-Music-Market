@@ -20,6 +20,9 @@ class Album
     #[ORM\JoinColumn(nullable: false)]
     private ?Artist $artist = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $album_img = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Album
     public function setArtist(?Artist $artist): static
     {
         $this->artist = $artist;
+
+        return $this;
+    }
+
+    public function getAlbumImg(): ?string
+    {
+        return $this->album_img;
+    }
+
+    public function setAlbumImg(string $album_img): static
+    {
+        $this->album_img = $album_img;
 
         return $this;
     }

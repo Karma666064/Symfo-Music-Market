@@ -3,35 +3,28 @@
 {% block title %}Album index{% endblock %}
 
 {% block body %}
-    <h1>Album index</h1>
+    <h1 class="title-album">Album index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Artist</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="cards-album">
         {% for album in albums %}
-            <tr>
-                <td>{{ album.id }}</td>
-                <td>{{ album.artist.name }}</td>
-                <td>{{ album.name }}</td>
-                <td>
-                    <a class="btn btn-outline-primary" href="{{ path('app_album_show', {'id': album.id}) }}">show</a>
-                    <a class="btn btn-outline-primary" href="{{ path('app_album_edit', {'id': album.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="card-album">
+            <div class="img-album"><img src="{{ asset('uploads/imgs/albums/'~album.albumImg) }}"></div>
 
-    <a class="btn btn-outline-primary" href="{{ path('app_album_new') }}">Create new</a>
+            <p>{{ album.name }} - <span>{{ album.artist.name }}</span></p>
+
+            <div class="btns">
+                <a class="btn btn-outline-primary" href="{{ path('app_album_show', {'id': album.id}) }}">show</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-outline-primary" href="{{ path('app_album_edit', {'id': album.id}) }}">edit</a>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <p class="no-album">Nothing is here</p>
+        {% endfor %}
+    </div>
+    
+    {% if is_granted('ROLE_ADMIN') %}
+    <a class="btn-create-new btn btn-outline-primary" href="{{ path('app_album_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

@@ -1,3 +1,77 @@
 body {
     background-color: #353336;
+    color: white;
+}
+
+/* ----- Album ----- */
+/* --- Index --- */
+.title-album {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.cards-album {
+    margin: 0 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    > .card-album {
+        background-color: #746a7c;
+        padding: 9px;
+        width: 300px;
+        border-radius: 6px;
+        text-align: center;
+
+        > .img-album {
+            background-color: #575757;
+            margin: 0 auto 9px;
+            width: 132px;
+            height: 132px;
+
+            > img {
+                width: 100%;
+            }
+        }
+
+        > .btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+    }
+}
+
+.btn-create-new {
+    display: block;
+    margin: 15px auto 0;
+    width: 108px;
+}
+
+/* --- show --- */
+.card-album-show {
+    background-color: #746a7c;
+    margin: 0 auto;
+    padding: 12px;
+    width: 600px;
+    border-radius: 9px;
+    font-size: 140%;
+    text-align: center;
+
+    > .img-album {
+        background-color: #575757;
+        margin: 0 auto 9px;
+        width: 264px;
+        height: 264px;
+
+        > img {
+            width: 100%;
+        }
+    }
+
+    > .btns {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
 }
