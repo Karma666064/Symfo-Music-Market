@@ -5,9 +5,9 @@ namespace App\Form;
 use App\Entity\Album;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
 
 class AlbumType extends AbstractType
 {
@@ -17,7 +17,7 @@ class AlbumType extends AbstractType
             ->add('name')
             ->add('artist')
             ->add('album_img', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'Image album',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

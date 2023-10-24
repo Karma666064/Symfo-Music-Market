@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
+use App\Repository\BuyingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -17,10 +18,18 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AlbumController extends AbstractController
 {
     #[Route('/', name: 'app_album_index', methods: ['GET'])]
-    public function index(AlbumRepository $albumRepository): Response
+    public function index(AlbumRepository $albumRepository, BuyingRepository $buyingRepository): Response
     {
+        $user = $this->getUser();
+        $myAlbums = [];
+        
+        if ($user) {
+            $myAlbums = $buyingRepository->findAlbumBounghtByUser($user->getId());
+        }
+
         return $this->render('album/index.html.twig', [
             'albums' => $albumRepository->findAll(),
+            'myAlbums' => $myAlbums
         ]);
     }
 

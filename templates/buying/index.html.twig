@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My albums{% endblock %}
+
+{% block body %}
+    <h1 class="title-page">My albums</h1>
+
+    <div class="cards-buying">
+    {% for buying in buyings %}
+        <div class="card-buying">
+            <div class="img-buying">
+                <img src="{{ asset('uploads/imgs/albums/'~buying.album.albumImg) }}">
+            </div>
+            <p>{{ buying.album.name }} - {{ buying.album.artist.name }}</p>
+        </div>
+    {% else %}
+        <p>You not have albums !</p>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -204,3 +204,25 @@ a {
         justify-content: center;
     }
 }
+
+/* ----- Buying ----- */
+/* --- Index --- */
+.cards-buying {
+    margin: 12px 21px;
+    display: flex;
+
+    > .card-buying {
+
+        > .img-buying {
+            width: 39px;
+            height: 39px;
+            
+            > img { width: 100%; }
+        }
+    }
+
+    > p {
+        text-align: center;
+        color: #575757;
+    }
+}

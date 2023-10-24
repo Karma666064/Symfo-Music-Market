@@ -3,7 +3,7 @@
 {% block title %}Album{% endblock %}
 
 {% block body %}
-    <h1 class="title-album">Album</h1>
+    <h1 class="title-page">Album</h1>
 
     <div class="cards-album">
         {% for album in albums %}
@@ -14,6 +14,9 @@
 
             <div class="btns">
                 <a class="btn btn-outline-primary" href="{{ path('app_album_show', {'id': album.id}) }}">Show</a>
+                {% if app.user and album not in myAlbums %}
+                <a class="btn btn-outline-primary" href="{{ path('app_buying', {'id': album.id}) }}">Buy</a>
+                {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                 <a class="btn btn-outline-primary" href="{{ path('app_album_edit', {'id': album.id}) }}">Edit</a>
                 {% endif %}

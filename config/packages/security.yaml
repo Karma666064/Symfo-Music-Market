@@ -33,6 +33,7 @@ security:
     access_control:
         - { path: ^/artist, roles: ROLE_ADMIN }
         - { path: ^/album/new, roles: ROLE_ADMIN }
+        - { path: ^/music, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

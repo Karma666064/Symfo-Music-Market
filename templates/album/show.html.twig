@@ -3,7 +3,7 @@
 {% block title %}Album{% endblock %}
 
 {% block body %}
-    <h1 class="title-album">Album</h1>
+    <h1 class="title-page">Album</h1>
 
     <div class="card-album-show">
         <div class="img-album"><img src="{{ asset('uploads/imgs/albums/'~album.albumImg) }}"></div>
@@ -12,6 +12,9 @@
 
         <div class="btns">
             <a class="btn btn-outline-primary" href="{{ path('app_album_index') }}">Back to list</a>
+            {% if app.user %}
+            <a class="btn btn-outline-primary" href="{{ path('app_buying', {'id': album.id}) }}">Buy</a>
+            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
             <a class="btn btn-outline-primary" href="{{ path('app_album_edit', {'id': album.id}) }}">Edit</a>
             {{ include('album/_delete_form.html.twig') }}

@@ -2,7 +2,8 @@
 	<div class="container-fluid">
 		<a class="navbar-brand" href="{{ path('app_home') }}">Music Market</a>
 
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
@@ -16,7 +17,9 @@
 				{% else %}
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="nav-link" href="{{ path('app_artist_index') }}">Artist</a>
+						<a class="nav-link" href="{{ path('app_music_index') }}">Music</a>
 					{% endif %}
+					<a class="nav-link" href="{{ path('app_buying_index') }}">My albums</a>
 					<a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
 				{% endif %}
 			</div>
